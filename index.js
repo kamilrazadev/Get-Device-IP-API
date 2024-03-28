@@ -8,7 +8,8 @@ app.use(express.json());
 app.use(cors());
 
 app.get("/get-ip", (req, res) => {
-  const ipAddress = req.ip;
+  const ipAddress =
+    req.headers["x-forwarded-for"] || req.connection.remoteAddress;
   res.json({ ip: ipAddress });
 });
 
